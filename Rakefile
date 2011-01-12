@@ -17,11 +17,11 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "musicbrainz-ruby"
-  s.version           = "0.1.0"
+  s.version           = "0.1.1"
   s.summary           = "HTTParty wrapper for MusicBrainz XML Web Service"
   s.author            = "Robin Tweedie"
   s.email             = "robin@songkick.com"
-  s.homepage          = ""
+  s.homepage          = "https://github.com/dwo/musicbrainz-ruby"
 
   s.has_rdoc          = true
   s.extra_rdoc_files  = %w(README.markdown)

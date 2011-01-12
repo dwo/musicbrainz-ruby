@@ -16,6 +16,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{HTTParty wrapper for MusicBrainz XML Web Service}
 
+  s.add_dependency('httparty', '>= 0.6.1')
+
+
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
