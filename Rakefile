@@ -2,8 +2,6 @@ require "rubygems"
 require "rake/gempackagetask"
 require "rake/rdoctask"
 
-
-
 task :default => :package do
   puts "Don't forget to write some tests!"
 end
@@ -17,8 +15,8 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "musicbrainz-ruby"
-  s.version           = "0.1.1"
-  s.summary           = "HTTParty wrapper for MusicBrainz XML Web Service"
+  s.version           = "0.1.2"
+  s.summary           = "Simple Ruby wrapper for MusicBrainz XML Web Service"
   s.author            = "Robin Tweedie"
   s.email             = "robin@songkick.com"
   s.homepage          = "https://github.com/dwo/musicbrainz-ruby"
@@ -33,10 +31,12 @@ spec = Gem::Specification.new do |s|
 
   # If you want to depend on other gems, add them here, along with any
   # relevant versions
-  # s.add_dependency("some_other_gem", "~> 0.1.0")
+  s.add_dependency(%q<httparty>, [">= 0.6.1"])
+  s.add_dependency(%q<hashie>, [">= 0.4"])
 
   # If your tests use any gems, include them here
-  # s.add_development_dependency("mocha") # for example
+  s.add_development_dependency(%q<rspec>, [">= 2.4"])
+  s.add_development_dependency(%q<fakeweb>, [">= 1.3"])
 end
 
 # This task actually builds the gem. We also regenerate a static
