@@ -1,13 +1,15 @@
 MusicBrainz-ruby
 ================
 
-O hai, I HTTParty'd ur [web service][1]. 
+O hai, I [HTTParty][1]'d with ur [web service][2].
 
 No offence, RBrainz gem.
 
-I have only done the artist call so far. 
+I have only done the artist call so far. Returns [Mashes][3] of the metadata tag.
 
-[1]: http://wiki.musicbrainz.org/XMLWebService
+[1]: https://github.com/jnunemaker/httparty
+[2]: http://wiki.musicbrainz.org/XMLWebService
+[3]: https://github.com/intridea/hashie
 
 Install
 -------
@@ -18,9 +20,11 @@ Examples
 --------
     
     require 'musicbrainz-ruby'
-    brainz = MusicBrainz.new
+    brainz = MusicBrainz::Client.new
     
+    # Find an artist by id, include artist relations
     brainz.artist('45d15468-2918-4da4-870b-d6b880504f77', :inc => 'artist-rels')
+    # Search for artists with the term 'Diplo'
     brainz.artist(nil, :query => 'Diplo')
     
 MIT License

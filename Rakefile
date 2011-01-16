@@ -15,7 +15,7 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "musicbrainz-ruby"
-  s.version           = "0.1.2"
+  s.version           = "0.1.3"
   s.summary           = "Simple Ruby wrapper for MusicBrainz XML Web Service"
   s.author            = "Robin Tweedie"
   s.email             = "robin@songkick.com"
@@ -43,9 +43,6 @@ end
 # .gemspec file, which is useful if something (i.e. GitHub) will
 # be automatically building a gem for this project. If you're not
 # using GitHub, edit as appropriate.
-#
-# To publish your gem online, install the 'gemcutter' gem; Read more 
-# about that here: http://gemcutter.org/pages/gem_docs
 Rake::GemPackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
