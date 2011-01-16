@@ -7,13 +7,13 @@ module MusicBrainz
     include HTTParty
     include Hashie
     
-    base_uri 'musicbrainz.org'
-  
+    base_uri 'musicbrainz.org/ws/1'
+
     def artist(musicbrainz_id = nil, params = {})
       options = {:query => {:type => 'xml'}}
       options[:query].merge!(params)
       
-      Mash.new(self.class.get("/ws/1/artist/#{musicbrainz_id}", options))
+      Mash.new(self.class.get("/artist/#{musicbrainz_id}", options))
     end
   end
 end
