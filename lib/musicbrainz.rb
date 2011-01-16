@@ -9,15 +9,15 @@ module MusicBrainz
 
     base_uri 'musicbrainz.org/ws/1'
     
-    def request(path, options)
+    def request(path, params)
+      options = {:query => {:type => 'xml'}}
+      options[:query].merge!(params)
+
       Mash.new(self.class.get(path, options)).metadata
     end
 
     def artist(musicbrainz_id = nil, params = {})
-      options = {:query => {:type => 'xml'}}
-      options[:query].merge!(params)
-      
-      request("/artist/#{musicbrainz_id}", options)
+      request("/artist/#{musicbrainz_id}", params)
     end
   end
 end
