@@ -16,8 +16,14 @@ module MusicBrainz
     def request(path, params)
       options = {:query => {:type => 'xml'}}
       options[:query].merge!(params)
-
-      Mash.new(self.class.get(path, options)).metadata
+      
+      response = self.class.get(path, options)
+      
+      if response.response.is_a? Net::HTTPBadRequest
+        raise ArgumentError, response.parsed_response
+      end
+      
+      Mash.new(response).metadata
     end
 
     def artist(musicbrainz_id = nil, params = {})

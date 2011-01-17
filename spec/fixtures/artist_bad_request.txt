@@ -1,0 +1,2 @@
+Must specify a least one parameter (other than 'limit', 'offset' or empty 'query') for collections query.
+For usage, please see: http://musicbrainz.org/development/mmd

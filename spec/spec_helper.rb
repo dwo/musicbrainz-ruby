@@ -14,3 +14,7 @@ FakeWeb.allow_net_connect = false
   body = File.read(File.join dir, 'fixtures', "#{fixture}.xml")
   FakeWeb.register_uri(:get, url, :body => body, :content_type => 'text/xml; charset=utf-8')
 end
+
+bad_request = 'http://musicbrainz.org/ws/1/artist/?type=xml'
+body = File.read(File.join dir, 'fixtures', "artist_bad_request.txt")
+FakeWeb.register_uri(:get, bad_request, :body => body, :status => ['400', 'Bad Request'])
