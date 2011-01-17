@@ -29,5 +29,21 @@ module MusicBrainz
     def artist(musicbrainz_id = nil, params = {})
       request("/artist/#{musicbrainz_id}", params)
     end
+    
+    def release_group(musicbrainz_id = nil, params = {})
+      request("/release-group/#{musicbrainz_id}", params)
+    end
+    
+    def release(musicbrainz_id = nil, params = {})
+      request("/release/#{musicbrainz_id}", params)
+    end
+    
+    def track(musicbrainz_id = nil, params = {})
+      request("/track/#{musicbrainz_id}", params)
+    end
+    
+    def label(musicbrainz_id = nil, params = {})
+      request("/label/#{musicbrainz_id}", params)
+    end
   end
 end

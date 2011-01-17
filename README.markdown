@@ -5,7 +5,7 @@ O hai, I [HTTParty][1]'d with ur [web service][2].
 
 No offence, RBrainz gem.
 
-I have only done the artist call so far. Returns [Mashes][3] of the metadata tag.
+I have only done the artist, release_group, release, track and label GET calls so far. Returns [Mashes][3] of the metadata tag.
 
 [1]: https://github.com/jnunemaker/httparty
 [2]: http://wiki.musicbrainz.org/XMLWebService

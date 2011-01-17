@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{musicbrainz-ruby}
-  s.version = "0.1.3"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robin Tweedie"]
-  s.date = %q{2011-01-16}
+  s.date = %q{2011-01-17}
   s.email = %q{robin@songkick.com}
   s.extra_rdoc_files = ["README.markdown"]
   s.files = ["README.markdown", "lib/musicbrainz.rb"]
