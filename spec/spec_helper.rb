@@ -1,4 +1,6 @@
 require 'rubygems'
+
+gem 'fakeweb', '~> 1.3.0'
 require 'fakeweb'
 
 dir = File.expand_path(File.dirname(__FILE__))
