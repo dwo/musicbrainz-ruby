@@ -18,3 +18,9 @@ end
 bad_request = 'http://musicbrainz.org/ws/1/artist/?type=xml'
 body = File.read(File.join dir, 'fixtures', "artist_bad_request.txt")
 FakeWeb.register_uri(:get, bad_request, :body => body, :status => ['400', 'Bad Request'])
+
+rating_request = 'http://musicbrainz.org/ws/1/rating/?id=4bd31567-70a8-4007-9ac6-3c68c7fc3d45&type=xml&entity=artist'
+error_body = File.read(File.join dir, 'fixtures', "rating_auth_required.html")
+rating_body = File.read(File.join dir, 'fixtures', "rating_by_id.xml")
+FakeWeb.register_uri(:get, rating_request, [{:body => error_body, :status => ["401", "Authorization Required"]},
+                                            {:body => rating_body, :content_type => 'text/xml; charset=utf-8'}])

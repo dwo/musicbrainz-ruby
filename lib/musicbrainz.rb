@@ -13,6 +13,10 @@ module MusicBrainz
 
     base_uri 'musicbrainz.org/ws/1'
     
+    def initialize(username = nil, password = nil)
+      self.class.digest_auth username, password
+    end
+    
     def request(path, params)
       options = {:query => {:type => 'xml'}}
       options[:query].merge!(params)
@@ -21,6 +25,10 @@ module MusicBrainz
       
       if response.response.is_a? Net::HTTPBadRequest
         raise ArgumentError, response.parsed_response
+      end
+            
+      if response.response.is_a? Net::HTTPUnauthorized
+        raise RuntimeError, response.body
       end
       
       Mash.new(response).metadata
@@ -44,6 +52,10 @@ module MusicBrainz
     
     def label(musicbrainz_id = nil, params = {})
       request("/label/#{musicbrainz_id}", params)
+    end
+    
+    def rating(params = {})
+      request("/rating/", params)
     end
   end
 end

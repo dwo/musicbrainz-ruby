@@ -2,12 +2,30 @@ require 'spec_helper'
 
 describe MusicBrainz::Client do
   let(:client){ MusicBrainz::Client.new }
-  
+
   context 'when making a bad request' do
     subject { client.artist }
 
     it 'should raise a useful error' do
       lambda {subject}.should raise_error(ArgumentError, /Must specify a least one parameter/)
+    end
+  end
+  
+  context 'when requesting a resource requiring authentication' do
+    subject { client.rating(:id => '4bd31567-70a8-4007-9ac6-3c68c7fc3d45', :entity => 'artist') }
+
+    context 'a rating is requested without authentication' do
+      it 'raises an error' do
+        lambda {subject}.should raise_error(RuntimeError, /Authorization Required/)
+      end
+    end
+    
+    context 'a rating is requested with authentication' do
+      let(:client) { MusicBrainz::Client.new('user', 'password') }
+      
+      it 'returns the rating' do
+        subject.user_rating.should == "5"
+      end
     end
   end
   
@@ -28,4 +46,6 @@ describe MusicBrainz::Client do
       subject.artist.name.should == 'Diplo'
     end
   end
+  
+  
 end
