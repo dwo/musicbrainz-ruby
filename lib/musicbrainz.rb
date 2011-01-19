@@ -55,7 +55,15 @@ module MusicBrainz
     end
     
     def rating(params = {})
-      request("/rating/", params)
+      request('/rating/', params)
+    end
+    
+    def tag(params = {})
+      request('/tag/', params)
+    end
+    
+    def collection(params = {})
+      request('/collection/', params)
     end
   end
 end
