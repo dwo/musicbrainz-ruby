@@ -16,23 +16,6 @@ module MusicBrainz
     def initialize(username = nil, password = nil)
       self.class.digest_auth username, password
     end
-    
-    def request(path, params)
-      options = {:query => {:type => 'xml'}}
-      options[:query].merge!(params)
-      
-      response = self.class.get(path, options)
-      
-      if response.response.is_a? Net::HTTPBadRequest
-        raise ArgumentError, response.parsed_response
-      end
-            
-      if response.response.is_a? Net::HTTPUnauthorized
-        raise RuntimeError, response.body
-      end
-      
-      Mash.new(response).metadata
-    end
 
     def artist(musicbrainz_id = nil, params = {})
       request("/artist/#{musicbrainz_id}", params)
@@ -64,6 +47,24 @@ module MusicBrainz
     
     def collection(params = {})
       request('/collection/', params)
+    end
+    
+    private
+    def request(path, params)
+      options = {:query => {:type => 'xml'}}
+      options[:query].merge!(params)
+      
+      response = self.class.get(path, options)
+      
+      if response.response.is_a? Net::HTTPBadRequest
+        raise ArgumentError, response.parsed_response
+      end
+            
+      if response.response.is_a? Net::HTTPUnauthorized
+        raise RuntimeError, response.body
+      end
+      
+      Mash.new(response).metadata
     end
   end
 end
