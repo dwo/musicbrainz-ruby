@@ -15,7 +15,7 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "musicbrainz-ruby"
-  s.version           = "0.2.0"
+  s.version           = "0.2.1"
   s.summary           = "Simple Ruby wrapper for MusicBrainz XML Web Service"
   s.author            = "Robin Tweedie"
   s.email             = "robin@songkick.com"
@@ -31,7 +31,7 @@ spec = Gem::Specification.new do |s|
 
   # If you want to depend on other gems, add them here, along with any
   # relevant versions
-  s.add_dependency(%q<httparty>, [">= 0.6.1"])
+  s.add_dependency(%q<httparty>, [">= 0.7.3"])
   s.add_dependency(%q<hashie>, [">= 0.4"])
 
   # If your tests use any gems, include them here

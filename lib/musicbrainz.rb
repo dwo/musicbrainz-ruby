@@ -1,6 +1,6 @@
 require 'rubygems'
 
-gem 'httparty', '~> 0.6.1'
+gem 'httparty', '~> 0.7.3'
 require 'httparty'
 
 gem 'hashie', '~> 0.4.0'
