@@ -47,5 +47,11 @@ describe MusicBrainz::Client do
     end
   end
   
-  
+  context 'simple rating submission' do
+    subject { client.post('rating', {:id => 'a56bd8f9-8ef8-4d63-89a4-794ed1360dd2', :entity => 'artist', :rating => 3}) }
+    
+    it 'should post successfully' do
+      subject.should be_true
+    end
+  end
 end

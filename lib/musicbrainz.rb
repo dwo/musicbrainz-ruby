@@ -49,6 +49,11 @@ module MusicBrainz
       request('/collection/', params)
     end
     
+    def post(resource, params = {})
+      response = self.class.post("/#{resource}/", :body => params)
+      return true if response.response.is_a? Net::HTTPOK
+    end
+    
     private
     def request(path, params)
       options = {:query => {:type => 'xml'}}
