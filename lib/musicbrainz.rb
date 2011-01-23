@@ -13,6 +13,7 @@ module MusicBrainz
 
     base_uri 'musicbrainz.org/ws/1'
     
+    # Provide your username and password if you need to make authenticated calls
     def initialize(username = nil, password = nil)
       self.class.digest_auth username, password
     end
@@ -49,6 +50,7 @@ module MusicBrainz
       request('/collection/', params)
     end
     
+    # provide a resource you want to post to, and the appropriate parameters
     def post(resource, params = {})
       response = self.class.post("/#{resource}/", :body => params)
       if response.response.is_a? Net::HTTPOK
