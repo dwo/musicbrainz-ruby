@@ -19,7 +19,7 @@ Install
 Examples
 --------
     
-    require 'musicbrainz-ruby'
+    require 'musicbrainz'
     brainz = MusicBrainz::Client.new('username', 'password')
     
     # Find an artist by id, include artist relations
