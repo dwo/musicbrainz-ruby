@@ -51,7 +51,11 @@ module MusicBrainz
     
     def post(resource, params = {})
       response = self.class.post("/#{resource}/", :body => params)
-      return true if response.response.is_a? Net::HTTPOK
+      if response.response.is_a? Net::HTTPOK
+        return true
+      else
+        raise response.response.message
+      end
     end
     
     private
@@ -66,7 +70,7 @@ module MusicBrainz
       end
             
       if response.response.is_a? Net::HTTPUnauthorized
-        raise RuntimeError, response.body
+        raise response.response.message
       end
       
       Mash.new(response).metadata
