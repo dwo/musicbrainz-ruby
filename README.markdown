@@ -1,11 +1,11 @@
 MusicBrainz-ruby
 ================
 
-O hai, I [HTTParty][1]'d with ur [web service][2].
+O hai, I [HTTParty][1]'d with ur [web service][2]. No offence, RBrainz gem.
 
-No offence, RBrainz gem.
+This gem supports authentication, all the GET calls and basic POSTing (not batch POSTs) provided you read the web service documentation and provide the correct parameters. 
 
-I have only done the artist, release_group, release, track and label GET calls so far. Returns [Mashes][3] of the metadata tag.
+Returns [Mashes][3] of the metadata tag.
 
 [1]: https://github.com/jnunemaker/httparty
 [2]: http://wiki.musicbrainz.org/XMLWebService
@@ -20,17 +20,19 @@ Examples
 --------
     
     require 'musicbrainz-ruby'
-    brainz = MusicBrainz::Client.new
+    brainz = MusicBrainz::Client.new('username', 'password')
     
     # Find an artist by id, include artist relations
     brainz.artist('45d15468-2918-4da4-870b-d6b880504f77', :inc => 'artist-rels')
     # Search for artists with the term 'Diplo'
     brainz.artist(nil, :query => 'Diplo')
+    # Tag an Artist
+    brainz.post('tag', :id => '45d15468-2918-4da4-870b-d6b880504f77', :entity => 'artist', :tags => 'post-everything')
     
 MIT License
 ===========
 
-(c) Robin Tweedie 2010
+(c) Robin Tweedie 2011
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
