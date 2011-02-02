@@ -32,7 +32,7 @@ spec = Gem::Specification.new do |s|
   # If you want to depend on other gems, add them here, along with any
   # relevant versions
   s.add_dependency(%q<httparty>, [">= 0.7.3"])
-  s.add_dependency(%q<hashie>, [">= 0.4"])
+  s.add_dependency(%q<hashie>, ["~> 1.0"])
 
   # If your tests use any gems, include them here
   s.add_development_dependency(%q<rspec>, [">= 2.4"])
