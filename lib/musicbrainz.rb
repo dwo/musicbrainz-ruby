@@ -11,7 +11,7 @@ module MusicBrainz
     include HTTParty
     include Hashie
 
-    base_uri 'musicbrainz.org/ws/1'
+    base_uri 'musicbrainz.org/ws/2'
     
     # Provide your username and password if you need to make authenticated calls
     def initialize(username = nil, password = nil)
