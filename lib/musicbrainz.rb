@@ -12,10 +12,12 @@ module MusicBrainz
     include Hashie
 
     base_uri 'musicbrainz.org/ws/2'
+    @@useragent = nil
     
     # Provide your username and password if you need to make authenticated calls
-    def initialize(username = nil, password = nil)
+    def initialize(username = nil, password = nil, useragent = nil)
       self.class.digest_auth username, password
+      @@useragent = useragent
     end
 
     def artist(musicbrainz_id = nil, params = {})
@@ -62,8 +64,10 @@ module MusicBrainz
     
     private
     def request(path, params)
-      options = {:query => {:type => 'xml'}}
-      options[:query].merge!(params)
+      options = {
+        :query => params,
+        :headers => @@useragent.nil? ? {} : {'User-Agent' => @@useragent}
+      }
       
       response = self.class.get(path, options)
       

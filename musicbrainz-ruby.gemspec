@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{musicbrainz-ruby}
-  s.version = "0.3.2"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Robin Tweedie"]
-  s.date = %q{2011-02-02}
+  s.authors = ["Robin Tweedie", "Gregory Eremin"]
+  s.date = %q{2011-06-24}
   s.email = %q{robin@songkick.com}
   s.extra_rdoc_files = ["README.markdown"]
   s.files = ["README.markdown", "lib/musicbrainz.rb"]
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--main", "README.markdown"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.4.2}
-  s.summary = %q{Simple Ruby wrapper for MusicBrainz XML Web Service}
+  s.summary = %q{Simple Ruby wrapper for MusicBrainz XML Web Service 2}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

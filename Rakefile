@@ -15,9 +15,9 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "musicbrainz-ruby"
-  s.version           = "0.3.2"
-  s.summary           = "Simple Ruby wrapper for MusicBrainz XML Web Service"
-  s.author            = "Robin Tweedie"
+  s.version           = "0.4.0"
+  s.summary           = "Simple Ruby wrapper for MusicBrainz XML Web Service 2"
+  s.authors           = ["Robin Tweedie", "Gregory Eremin"]
   s.email             = "robin@songkick.com"
   s.homepage          = "https://github.com/dwo/musicbrainz-ruby"
 
