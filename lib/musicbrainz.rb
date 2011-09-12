@@ -11,30 +11,35 @@ module MusicBrainz
     include HTTParty
     include Hashie
 
-    base_uri 'musicbrainz.org/ws/1'
+    base_uri 'musicbrainz.org/ws/2'
     
     # Provide your username and password if you need to make authenticated calls
     def initialize(username = nil, password = nil)
       self.class.digest_auth username, password
     end
 
-    def artist(musicbrainz_id = nil, params = {})
+    def artist(params = {})
+      musicbrainz_id = params.delete(:mbid)
       request("/artist/#{musicbrainz_id}", params)
     end
     
-    def release_group(musicbrainz_id = nil, params = {})
+    def release_group(params = {})
+      musicbrainz_id = params.delete(:mbid)
       request("/release-group/#{musicbrainz_id}", params)
     end
     
-    def release(musicbrainz_id = nil, params = {})
+    def release(params = {})
+      musicbrainz_id = params.delete(:mbid)
       request("/release/#{musicbrainz_id}", params)
     end
     
-    def track(musicbrainz_id = nil, params = {})
+    def track(params = {})
+      musicbrainz_id = params.delete(:mbid)
       request("/track/#{musicbrainz_id}", params)
     end
     
-    def label(musicbrainz_id = nil, params = {})
+    def label(params = {})
+      musicbrainz_id = params.delete(:mbid)
       request("/label/#{musicbrainz_id}", params)
     end
     
@@ -62,8 +67,8 @@ module MusicBrainz
     
     private
     def request(path, params)
-      options = {:query => {:type => 'xml'}}
-      options[:query].merge!(params)
+      options = {}
+      options[:query] = params
       
       response = self.class.get(path, options)
       
