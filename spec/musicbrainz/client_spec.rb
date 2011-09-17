@@ -4,7 +4,7 @@ describe MusicBrainz::Client do
   let(:client){ MusicBrainz::Client.new }
   subject { client }
 
-  it 'provides access to the resources which represent the the core entities' do
+  it 'provides access to the core resources' do
     should respond_to(:artist, :label, :recording, :release, :release_group, :work)  
   end
 
@@ -12,7 +12,7 @@ describe MusicBrainz::Client do
     should respond_to(:rating, :tag, :collection)
   end
 
-  it 'provies access to the lookups based on other unique identifiers' do
+  it 'provides access to the unique identifier lookups' do
     should respond_to(:discid, :puid, :isrc, :iswc)
   end
 
