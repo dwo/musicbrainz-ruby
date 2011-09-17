@@ -37,6 +37,11 @@ module MusicBrainz
       musicbrainz_id = params.delete(:mbid)
       request("/release-group/#{musicbrainz_id}", params)
     end
+
+    def work(params = {})
+      musicbrainz_id = params.delete(:mbid)
+      request("/work/#{musicbrainz_id}", params)
+    end
     
     def release(params = {})
       musicbrainz_id = params.delete(:mbid)
