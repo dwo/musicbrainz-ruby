@@ -13,56 +13,51 @@ module MusicBrainz
 
     base_uri 'musicbrainz.org/ws/2'
 
+    UNIQUE_IDENTIFIERS = %q{discid puid isrc iswc}
+
     # Provide your username and password if you need to make authenticated calls
     def initialize(username = nil, password = nil)
       self.class.digest_auth username, password
     end
 
     def artist(params = {})
-      musicbrainz_id = params.delete(:mbid)
-      request("/artist/#{musicbrainz_id}", params)
+      request('artist', params)
     end
 
     def label(params = {})
-      musicbrainz_id = params.delete(:mbid)
-      request("/label/#{musicbrainz_id}", params)
+      request('label', params)
     end
 
     def recording(params = {})
-      musicbrainz_id = params.delete(:mbid)
-      request("/recording/#{musicbrainz_id}", params)
+      request('recording', params)
     end
 
     def release_group(params = {})
-      musicbrainz_id = params.delete(:mbid)
-      request("/release-group/#{musicbrainz_id}", params)
+      request('release-group', params)
     end
 
     def work(params = {})
-      musicbrainz_id = params.delete(:mbid)
-      request("/work/#{musicbrainz_id}", params)
+      request('work', params)
     end
 
     def release(params = {})
-      musicbrainz_id = params.delete(:mbid)
-      request("/release/#{musicbrainz_id}", params)
+      request('release', params)
     end
 
     def recording(params = {})
-      musicbrainz_id = params.delete(:mbid)
-      request("/recording/#{musicbrainz_id}", params)
+      request('recording', params)
     end
 
     def rating(params = {})
-      request('/rating/', params)
+      request('rating', params)
     end
 
     def tag(params = {})
-      request('/tag/', params)
+      request('tag', params)
     end
 
     def collection(params = {})
-      request('/collection/', params)
+      request('collection', params)
     end
 
     def discid
@@ -92,8 +87,16 @@ module MusicBrainz
     end
 
     private
-    def request(path, params)
-      options = {}
+    def request(resource, params)
+      id, options = nil, {}
+
+      if UNIQUE_IDENTIFIERS.include?(resource)
+        id = params.delete(resource.to_sym)
+      else
+        id = params.delete(:mbid)
+      end
+
+      path = "/#{resource}/#{id}"
       options[:query] = params
 
       response = self.class.get(path, options)
