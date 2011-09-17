@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe MusicBrainz::Client do
   let(:client){ MusicBrainz::Client.new }
+  subject { client }
+
+  it 'provides access to the resources which represent the the core entities' do
+    should respond_to(:artist, :label, :recording, :release, :release_group)  
+  end
+
+  it 'provides access to the non-core resources' do
+    should respond_to(:rating, :tag, :collection)
+  end
 
   context 'when making a bad request' do
     subject { client.artist }

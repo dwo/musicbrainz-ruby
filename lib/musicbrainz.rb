@@ -23,6 +23,16 @@ module MusicBrainz
       request("/artist/#{musicbrainz_id}", params)
     end
     
+    def label(params = {})
+      musicbrainz_id = params.delete(:mbid)
+      request("/label/#{musicbrainz_id}", params)
+    end
+    
+    def recording(params = {})
+      musicbrainz_id = params.delete(:mbid)
+      request("/recording/#{musicbrainz_id}", params)
+    end
+    
     def release_group(params = {})
       musicbrainz_id = params.delete(:mbid)
       request("/release-group/#{musicbrainz_id}", params)
@@ -36,11 +46,6 @@ module MusicBrainz
     def track(params = {})
       musicbrainz_id = params.delete(:mbid)
       request("/track/#{musicbrainz_id}", params)
-    end
-    
-    def label(params = {})
-      musicbrainz_id = params.delete(:mbid)
-      request("/label/#{musicbrainz_id}", params)
     end
     
     def rating(params = {})
