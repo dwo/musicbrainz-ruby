@@ -12,6 +12,10 @@ describe MusicBrainz::Client do
     should respond_to(:rating, :tag, :collection)
   end
 
+  it 'provies access to the lookups based on other unique identifiers' do
+    should respond_to(:discid, :puid, :isrc, :iswc)
+  end
+
   context 'when making a bad request' do
     subject { client.artist }
 
