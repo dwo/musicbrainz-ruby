@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency(%q<httparty>, ["~> 0.8.0"])
-  s.add_runtime_dependency(%q<hashie>, ["~> 1.0"])
+  s.add_runtime_dependency(%q<hashie>, ["~> 1.1.0"])
   s.add_development_dependency(%q<rspec>, [">= 2.4"])
   s.add_development_dependency(%q<fakeweb>, [">= 1.3"])
 end
