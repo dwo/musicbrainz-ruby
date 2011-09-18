@@ -60,20 +60,20 @@ module MusicBrainz
       request('collection', params)
     end
 
-    def discid
-
+    def discid(params = {})
+      request('discid', params)
     end
 
-    def puid
-
+    def puid(params = {})
+      request('puid', params)
     end
 
-    def isrc
-
+    def isrc(params = {})
+      request('isrc', params)
     end
 
-    def iswc
-
+    def iswc(params = {})
+      request('iswc', params)
     end
 
     # provide a resource you want to post to, and the appropriate parameters
@@ -97,7 +97,7 @@ module MusicBrainz
       end
 
       path = "/#{resource}/#{id}"
-      options[:query] = params
+      options[:query] = params unless params.empty?
 
       response = self.class.get(path, options)
 

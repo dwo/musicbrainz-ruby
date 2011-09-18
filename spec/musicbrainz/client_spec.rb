@@ -5,15 +5,16 @@ describe MusicBrainz::Client do
   subject { client }
 
   it 'provides access to the core resources' do
-    should respond_to(:artist, :label, :recording, :release, :release_group, :work)
+    resources = [:artist, :label, :recording, :release, :release_group, :work]
+    should respond_to(*resources).with(1).argument
   end
 
   it 'provides access to the non-core resources' do
-    should respond_to(:rating, :tag, :collection)
+    should respond_to(:rating, :tag, :collection).with(1).argument
   end
 
   it 'provides access to the unique identifier lookups' do
-    should respond_to(:discid, :puid, :isrc, :iswc)
+    should respond_to(:discid, :puid, :isrc, :iswc).with(1).argument
   end
 
   context 'when making a bad request' do
@@ -60,8 +61,9 @@ describe MusicBrainz::Client do
     end
   end
 
-  context 'simple rating submission' do
-    subject { client.post('rating', {:id => 'a56bd8f9-8ef8-4d63-89a4-794ed1360dd2', :entity => 'artist', :rating => 3}) }
+  context 'when submitting a rating' do
+    let(:mbid) { 'a56bd8f9-8ef8-4d63-89a4-794ed1360dd2' }
+    subject { client.post('rating', {:id => mbid, :entity => 'artist', :rating => 3}) }
 
     it 'should post successfully' do
       subject.should be_true

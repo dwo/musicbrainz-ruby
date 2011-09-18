@@ -8,12 +8,15 @@ require File.join(dir, '..', 'lib', 'musicbrainz')
 
 FakeWeb.allow_net_connect = false
 
-{:artist_search_diplo => 'http://musicbrainz.org/ws/2/artist/?query=Diplo',
- :artist_by_id_diplo  => 'http://musicbrainz.org/ws/2/artist/a56bd8f9-8ef8-4d63-89a4-794ed1360dd2',
+base = MusicBrainz::Client.base_uri
+{:artist_search_diplo => base + '/artist/?query=Diplo',
+ :artist_by_id_diplo  => base + '/artist/a56bd8f9-8ef8-4d63-89a4-794ed1360dd2'
 }.each do |fixture, url|
-  body = File.read(File.join dir, 'fixtures', "#{fixture}.xml")
-  FakeWeb.register_uri(:get, url, :body => body, :content_type => 'text/xml; charset=utf-8')
-  FakeWeb.register_uri(:head, url, :content_type => 'text/xml; charset=utf-8')
+  path = File.join(dir, 'fixtures', "#{fixture}.xml")
+  body = File.read(path) if File.file?(path)
+  content_type = 'text/xml; charset=utf-8'
+  FakeWeb.register_uri(:get, url, :body => body, :content_type => content_type)
+  FakeWeb.register_uri(:head, url, :content_type => content_type)
 end
 
 bad_request = 'http://musicbrainz.org/ws/2/artist/'
