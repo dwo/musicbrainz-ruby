@@ -1,9 +1,5 @@
 require 'rubygems'
-
-gem 'httparty', '~> 0.7.3'
 require 'httparty'
-
-gem 'hashie', '~> 1.0'
 require 'hashie'
 
 module MusicBrainz
