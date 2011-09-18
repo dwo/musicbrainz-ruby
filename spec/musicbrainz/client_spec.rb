@@ -20,13 +20,14 @@ describe MusicBrainz::Client do
   context 'when making a bad request' do
     subject { client.artist } # request has no parameters
 
-    it 'should raise a useful error' do
+    it 'raises an error' do
       lambda {subject}.should raise_error(ArgumentError, /Must specify a least one parameter/)
     end
   end
 
   context 'when requesting resources requiring authentication' do
-    subject { client.rating(:id => '4bd31567-70a8-4007-9ac6-3c68c7fc3d45', :entity => 'artist') }
+    let(:mbid) { '4bd31567-70a8-4007-9ac6-3c68c7fc3d45' }
+    subject { client.rating(:id => mbid, :entity => 'artist') }
 
     context 'a rating is requested without authentication' do
       it 'raises an error' do
