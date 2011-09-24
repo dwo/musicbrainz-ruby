@@ -53,7 +53,7 @@ describe MusicBrainz::Client do
     end
   end
 
-  context 'when fetching an resource by MusicBrainz id' do
+  context 'when fetching a resource by MusicBrainz id' do
     subject { client.artist(:mbid => 'a56bd8f9-8ef8-4d63-89a4-794ed1360dd2') }
 
     it 'returns a single resource' do
