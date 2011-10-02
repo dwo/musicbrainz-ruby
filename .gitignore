@@ -2,3 +2,4 @@ pkg
 .DS_Store
 *.swp
 Gemfile.lock
+.rbx
