@@ -8,9 +8,14 @@ module MusicBrainz
 
     base_uri 'musicbrainz.org/ws/2'
 
-    # Provide your username and password if you need to make authenticated calls
-    def initialize(username = nil, password = nil)
-      self.class.digest_auth username, password
+    DEFAULT_OPTIONS    = {:username   => nil,
+                          :password   => nil,
+                          :user_agent => "musicbrainz-ruby gem #{MusicBrainz::VERSION}"}
+
+    # Provide your username and password to make authenticated calls
+    def initialize(options = {})
+      options.merge!(DEFAULT_OPTIONS)
+      self.class.digest_auth options[:username], options[:password]
     end
 
     def artist(params = {})

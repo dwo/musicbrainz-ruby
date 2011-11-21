@@ -3,9 +3,10 @@ module MusicBrainz
     UNIQUE_IDENTIFIERS = %q{discid puid isrc iswc}
 
     def initialize(resource, params)
-      @resource = resource
-      @params   = params
-      @id       = nil
+      @resource   = resource
+      @params     = params
+      @id         = nil
+      @user_agent = DEFAULT_USER_AGENT
 
       if UNIQUE_IDENTIFIERS.include?(resource)
         @id = params.delete(resource.to_sym)
@@ -21,6 +22,7 @@ module MusicBrainz
     def options
       options = {}
       options[:query] = @params unless @params.empty?
+      options[:headers] = {'User-Agent' => @user_agent}
       options
     end
 
