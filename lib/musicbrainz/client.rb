@@ -8,9 +8,7 @@ module MusicBrainz
 
     base_uri 'musicbrainz.org/ws/2'
 
-    DEFAULT_OPTIONS    = {:username   => nil,
-                          :password   => nil,
-                          :user_agent => "musicbrainz-ruby gem #{MusicBrainz::VERSION}"}
+    DEFAULT_OPTIONS    = {:username => nil, :password => nil}
 
     # Provide your username and password to make authenticated calls
     def initialize(options = {})

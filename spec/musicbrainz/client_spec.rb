@@ -36,7 +36,9 @@ describe MusicBrainz::Client do
     end
 
     context 'and the resource is requested with authentication' do
-      let(:client) { MusicBrainz::Client.new('user', 'password') }
+      let(:client) do
+        MusicBrainz::Client.new(:user => 'user', :password => 'password')
+      end
 
       it 'returns the resource' do
         subject.user_rating.should == "5"
