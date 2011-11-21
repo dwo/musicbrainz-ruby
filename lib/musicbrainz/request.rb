@@ -2,7 +2,7 @@ module MusicBrainz
   class Request
 
     UNIQUE_IDENTIFIERS = %q{discid puid isrc iswc}
-    DEFAULT_USER_AGENT = "musicbrainz-ruby gem #{VERSION}"
+    DEFAULT_USER_AGENT = "musicbrainz-ruby gem #{MusicBrainz::VERSION}"
 
     def initialize(resource, params)
       @resource   = resource
