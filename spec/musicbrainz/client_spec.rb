@@ -64,12 +64,4 @@ describe MusicBrainz::Client do
     end
   end
 
-  context 'when posting to a resource' do
-    let(:mbid) { 'a56bd8f9-8ef8-4d63-89a4-794ed1360dd2' }
-    subject { client.post('rating', {:id => mbid, :entity => 'artist', :rating => 3}) }
-
-    it 'posts successfully' do
-      subject.should be_true
-    end
-  end
 end

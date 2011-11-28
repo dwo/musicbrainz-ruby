@@ -8,7 +8,7 @@ module MusicBrainz
 
     base_uri 'musicbrainz.org/ws/2'
 
-    DEFAULT_OPTIONS    = {:username => nil, :password => nil}
+    DEFAULT_OPTIONS = {:username => nil, :password => nil}
 
     # Provide your username and password to make authenticated calls
     def initialize(options = {})
@@ -70,16 +70,6 @@ module MusicBrainz
 
     def iswc(params = {})
       request('iswc', params)
-    end
-
-    # provide a resource you want to post to, and the appropriate parameters
-    def post(resource, params = {})
-      response = self.class.post("/#{resource}/", :body => params)
-      if response.response.is_a? Net::HTTPOK
-        return true
-      else
-        raise response.response.message
-      end
     end
 
     private
