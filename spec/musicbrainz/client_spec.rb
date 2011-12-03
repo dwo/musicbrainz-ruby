@@ -17,6 +17,20 @@ describe MusicBrainz::Client do
     should respond_to(:discid, :puid, :isrc, :iswc).with(1).argument
   end
 
+  it 'specifies a User-Agent in the headers' do
+    expected = /musicbrainz-ruby gem/
+    subject.class.default_options[:headers]['User-Agent'].should =~ expected
+  end
+
+  context 'when a User-Agent is provided' do
+    let(:user_agent) { 'Herp Derp v1.2.3' }
+    let(:client)     { MusicBrainz::Client.new(:'User-Agent' => user_agent) }
+
+    it 'specifies the provided User-Agent in the headers' do
+      subject.class.default_options[:headers]['User-Agent'].should == user_agent
+    end
+  end
+
   context 'when making a bad request' do
     subject { client.artist } # request has no parameters
 
@@ -37,7 +51,7 @@ describe MusicBrainz::Client do
 
     context 'and the resource is requested with authentication' do
       let(:client) do
-        MusicBrainz::Client.new(:user => 'user', :password => 'password')
+        MusicBrainz::Client.new(:username => 'user', :password => 'password')
       end
 
       it 'returns the resource' do

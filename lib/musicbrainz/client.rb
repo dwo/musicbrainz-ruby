@@ -6,14 +6,20 @@ module MusicBrainz
     include HTTParty
     include Hashie
 
-    base_uri 'musicbrainz.org/ws/2'
+    DEFAULT_USER_AGENT = "musicbrainz-ruby gem #{MusicBrainz::VERSION}"
 
-    DEFAULT_OPTIONS = {:username => nil, :password => nil}
+    base_uri 'musicbrainz.org/ws/2'
 
     # Provide your username and password to make authenticated calls
     def initialize(options = {})
-      options.merge!(DEFAULT_OPTIONS)
-      self.class.digest_auth options[:username], options[:password]
+      if options[:username] and options[:password]
+        self.class.digest_auth options[:username], options[:password]
+      end
+      if options[:'User-Agent']
+        self.class.headers 'User-Agent' => options[:'User-Agent']
+      else
+        self.class.headers 'User-Agent' => DEFAULT_USER_AGENT
+      end
     end
 
     def artist(params = {})
