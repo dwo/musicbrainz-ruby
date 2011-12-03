@@ -3,7 +3,8 @@ MusicBrainz-ruby
 
 O hai, I [HTTParty][1]'d with ur [web service][2]. No offence, RBrainz gem.
 
-This gem currently only supports the lookups. Data submission coming soon.
+This gem currently only supports the lookup, browse and search GET requests.
+Data submission coming soon.
 
 Returns [Mashes][3] of the metadata tag from MusicBrainz's XML responses.
 
@@ -24,7 +25,7 @@ Examples
 
     # Find an artist by id, include artist relations
     brainz.artist(:mbid => '45d15468-2918-4da4-870b-d6b880504f77', :inc => 'artist-rels')
-    # Search for artists with the term 'Diplo'
+    # Search for artists with the query 'Diplo'
     brainz.artist(:query => 'Diplo')
 
 MIT License
