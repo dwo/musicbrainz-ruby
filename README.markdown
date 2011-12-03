@@ -1,7 +1,7 @@
 MusicBrainz-ruby
 ================
 
-O hai, I [HTTParty][1]'d with ur [web service][2]. No offence, RBrainz gem.
+O hai, I [HTTParty][1]'d ur [web service][2]. No offence, RBrainz gem.
 
 This gem currently only supports the lookup, browse and search GET requests.
 Data submission coming soon.
