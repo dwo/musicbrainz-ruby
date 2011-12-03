@@ -8,7 +8,8 @@ module MusicBrainz
       @resource   = resource
       @params     = params
       @id         = nil
-      @user_agent = DEFAULT_USER_AGENT
+      @user_agent = params[:'User-Agent']
+      @user_agent ||= DEFAULT_USER_AGENT
 
       if UNIQUE_IDENTIFIERS.include?(resource)
         @id = params.delete(resource.to_sym)
