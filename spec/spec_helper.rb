@@ -31,8 +31,3 @@ FakeWeb.register_uri(:get, rating_request, [{:body => error_body, :status => ["4
                                             {:body => rating_body, :content_type => 'text/xml; charset=utf-8'}])
 FakeWeb.register_uri(:head, rating_request, [{:status => ["401", "Authorization Required"]},
                                              {:content_type => 'text/xml; charset=utf-8'}])
-
-rating_post = 'http://musicbrainz.org/ws/2/rating/'
-success_response = File.read(File.join dir, 'fixtures', "successful_post.xml")
-FakeWeb.register_uri(:post, rating_post, {:body => success_response, :content_type => 'text/xml; charset=utf-8'})
-FakeWeb.register_uri(:head, rating_post, {:content_type => 'text/xml; charset=utf-8'})
