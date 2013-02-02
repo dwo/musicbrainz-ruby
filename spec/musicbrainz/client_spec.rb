@@ -17,7 +17,7 @@ describe MusicBrainz::Client do
     should respond_to(:discid, :puid, :isrc, :iswc).with(1).argument
   end
 
-  it 'specifies a User-Agent in the headers' do
+  it 'specifies a default User-Agent in the headers' do
     expected = /musicbrainz-ruby gem/
     subject.class.default_options[:headers]['User-Agent'].should =~ expected
   end

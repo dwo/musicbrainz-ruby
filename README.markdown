@@ -4,7 +4,6 @@ MusicBrainz-ruby
 O hai, I [HTTParty][1]'d ur [web service][2]. No offence, RBrainz gem.
 
 This gem currently only supports the lookup, browse and search GET requests.
-Data submission coming soon.
 
 Returns [Mashes][3] of the metadata tag from MusicBrainz's XML responses.
 
@@ -21,7 +20,8 @@ Examples
 --------
 
     require 'musicbrainz'
-    brainz = MusicBrainz::Client.new('username', 'password')
+    brainz = MusicBrainz::Client.new(:username => 'username',
+                                     :password => 'password')
 
     # Find an artist by id, include artist relations
     brainz.artist(:mbid => '45d15468-2918-4da4-870b-d6b880504f77', :inc => 'artist-rels')
