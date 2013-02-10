@@ -1,6 +1,14 @@
 require 'rubygems'
 require 'fakeweb'
 
+if ENV['COVERAGE'] == "1"
+  require 'simplecov'
+
+  SimpleCov.start do
+    add_filter '/vendor/'
+  end
+end
+
 RSpec.configure do |config|
   config.order = 'random'
 end
