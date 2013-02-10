@@ -88,7 +88,7 @@ module MusicBrainz
       end
 
       if response.response.is_a? Net::HTTPUnauthorized
-        raise response.response.message
+        raise response.message
       end
 
       Mash.new(response).metadata
