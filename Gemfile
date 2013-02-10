@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gemspec
 
-group :development do
+group :local do
   gem 'nokogiri'
   gem 'simplecov'
 end
