@@ -16,6 +16,10 @@ Install
 
     gem install musicbrainz-ruby
 
+or in a Gemfile
+
+    gem 'musicbrainz-ruby', :require => 'musicbrainz'
+
 Examples
 --------
 
