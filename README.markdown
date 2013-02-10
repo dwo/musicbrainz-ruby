@@ -1,5 +1,4 @@
-MusicBrainz-ruby
-================
+# MusicBrainz-ruby [![Build Status](https://travis-ci.org/dwo/musicbrainz-ruby.png?branch=master)](https://travis-ci.org/dwo/musicbrainz-ruby)
 
 O hai, I [HTTParty][1]'d ur [web service][2]. No offence, RBrainz gem.
 
@@ -11,8 +10,7 @@ Returns [Mashes][3] of the metadata tag from MusicBrainz's XML responses.
 [2]: http://wiki.musicbrainz.org/XMLWebService
 [3]: https://github.com/intridea/hashie
 
-Install
--------
+## Install
 
     gem install musicbrainz-ruby
 
@@ -20,8 +18,7 @@ or in a Gemfile
 
     gem 'musicbrainz-ruby', :require => 'musicbrainz'
 
-Examples
---------
+## Examples
 
     require 'musicbrainz'
     brainz = MusicBrainz::Client.new(:username => 'username',
@@ -32,8 +29,7 @@ Examples
     # Search for artists with the query 'Diplo'
     brainz.artist(:query => 'Diplo')
 
-MIT License
-===========
+# MIT License
 
 (c) Robin Tweedie 2011
 
