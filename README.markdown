@@ -19,8 +19,7 @@ or in a Gemfile
 ## Examples
 
     require 'musicbrainz'
-    brainz = MusicBrainz::Client.new(:username => 'username',
-                                     :password => 'password')
+    brainz = MusicBrainz::Client.new('username', 'password')
 
     # Find an artist by id, include artist relations
     brainz.artist(:mbid => '45d15468-2918-4da4-870b-d6b880504f77', :inc => 'artist-rels')
@@ -29,7 +28,7 @@ or in a Gemfile
 
 # MIT License
 
-(c) Robin Tweedie 2014
+(c) Robin Tweedie 2011 - 2014
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

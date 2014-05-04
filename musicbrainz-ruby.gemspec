@@ -13,12 +13,9 @@ Gem::Specification.new do |s|
     musicbrainz-ruby
   EOF
   s.license      = 'MIT'
-  s.requirements = 'An account at musicbrainz.org'
+  s.requirements = 'An account at musicbrainz.org (optional, for requests requiring auth)'
 
-  s.files         = %w[lib/musicbrainz.rb
-                       lib/musicbrainz/client.rb
-                       lib/musicbrainz/request.rb
-                       lib/musicbrainz/version.rb]
+  s.files         = Dir.glob('lib/**/*.rb')
   s.test_files    = Dir.glob('spec/**/*_spec.rb')
   s.require_paths = ['lib']
   s.required_ruby_version = '>= 1.8.7', '<= 2.1.0'

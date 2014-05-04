@@ -3,6 +3,6 @@ require 'spec_helper'
 describe MusicBrainz::Request do
   let(:resource) { 'artist' }
   let(:params)   { Hash.new }
-  subject        { MusicBrainz::Request.new(resource, params) }
+  subject        { described_class.new(resource, params) }
 
 end

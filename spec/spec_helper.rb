@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'fakeweb'
 
-if ENV['COVERAGE'] == "1"
+if ENV['COVERAGE']
   require 'simplecov'
 
   SimpleCov.start do

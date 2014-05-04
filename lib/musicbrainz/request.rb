@@ -1,6 +1,5 @@
 module MusicBrainz
   class Request
-
     UNIQUE_IDENTIFIERS = %q{discid puid isrc iswc}
 
     def initialize(resource, params)
@@ -16,7 +15,7 @@ module MusicBrainz
     end
 
     def path
-      path = "/#{@resource}/#{@id}"
+      "/#{@resource}/#{@id}"
     end
 
     def options

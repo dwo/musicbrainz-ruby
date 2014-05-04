@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe MusicBrainz::Client do
+  CONTENT_TYPE = 'text/xml; charset=utf-8'
+
   subject      { described_class.new }
   after(:each) { FakeWeb.clean_registry }
 
@@ -17,7 +19,7 @@ describe MusicBrainz::Client do
     should respond_to(:discid, :puid, :isrc, :iswc).with(1).argument
   end
 
-  it 'specifies a default User-Agent in the headers' do
+  it 'specifies a User-Agent in the headers' do
     expected = /musicbrainz-ruby #{MusicBrainz::VERSION}/
     expect(subject.class.default_options[:headers]['User-Agent']).to match(expected)
   end
@@ -33,37 +35,41 @@ describe MusicBrainz::Client do
     end
 
     it 'raises an error' do
-      expect { subject.artist }.
-        to raise_error(ArgumentError, /Must specify a least one parameter/)
+      expect {
+        subject.artist
+      }.to raise_error(described_class::Error, /Must specify a least one parameter/)
     end
   end
 
   context 'when requesting resources requiring authentication' do
-    subject      { described_class.new(options) }
+    subject      { described_class.new(user, password) }
     let(:mbid)   { '4bd31567-70a8-4007-9ac6-3c68c7fc3d45' }
     let(:entity) { 'artist'}
     let(:expected_rating) { '5' }
 
     context 'and the resource is requested with authentication' do
-      let(:options) { {:username => 'user', :password => 'password'} }
+      let(:user) { 'user' }
+      let(:password) { 'password' }
+
       before do
         rating_uri = described_class.base_uri + "/rating/?id=#{mbid}&entity=#{entity}"
         expected_body = "<metadata><user-rating>#{expected_rating}</user-rating></metadata>"
 
-        FakeWeb.register_uri(:head, rating_uri, :content_type => 'text/xml; charset=utf-8')
+        FakeWeb.register_uri(:head, rating_uri, :content_type => CONTENT_TYPE)
         FakeWeb.register_uri(:get,  rating_uri, :body         => expected_body,
-                                                :content_type => 'text/xml; charset=utf-8')
+                                                :content_type => CONTENT_TYPE)
       end
 
       it 'returns the resource' do
-        expect(subject.rating(:id => mbid, :entity => entity).
-                user_rating).
-                to eq(expected_rating)
+        expect(subject.rating(:id => mbid, :entity => entity)['user_rating']).
+          to eq(expected_rating)
       end
     end
 
     context 'and the resource is requested without authentication' do
-      let(:options) { Hash.new }
+      let(:user) { nil }
+      let(:password) { nil }
+
       before do
         rating_uri = described_class.base_uri + "/rating/?id=#{mbid}&entity=#{entity}"
         FakeWeb.register_uri(:head, rating_uri, :status => ['401', 'Authorization Required'])
@@ -72,7 +78,7 @@ describe MusicBrainz::Client do
 
       it 'raises an error' do
         expect { subject.rating(:id => mbid, :entity => entity) }.
-          to raise_error(RuntimeError, /Authorization Required/)
+          to raise_error(described_class::Error, /Authorization Required/)
       end
     end
 
@@ -86,17 +92,16 @@ describe MusicBrainz::Client do
 
       path = File.expand_path(File.join('spec', 'fixtures', 'artist_search_diplo.xml'))
       expected_body = File.read(path)
-      content_type = 'text/xml; charset=utf-8'
 
-      FakeWeb.register_uri(:head, uri, :content_type => content_type)
-      FakeWeb.register_uri(:get,  uri, :content_type => content_type,
+      FakeWeb.register_uri(:head, uri, :content_type => CONTENT_TYPE)
+      FakeWeb.register_uri(:get,  uri, :content_type => CONTENT_TYPE,
                                        :body         => expected_body)
     end
 
     it 'returns a list of resources' do
-      results = subject.artist(:query => query).artist_list.artist
-      expect(results).to be_kind_of(Array)
-      expect(results.size).to eq(11)
+      results = subject.artist(:query => query)
+      expect(results['artist_list']['artist']).to be_kind_of(Array)
+      expect(results['artist_list']['artist'].size).to eq(11)
     end
   end
 
@@ -108,16 +113,15 @@ describe MusicBrainz::Client do
 
       path = File.expand_path(File.join('spec', 'fixtures', 'artist_by_id_diplo.xml'))
       expected_body = File.read(path)
-      content_type = 'text/xml; charset=utf-8'
 
-      FakeWeb.register_uri(:head, uri, :content_type => content_type)
-      FakeWeb.register_uri(:get,  uri, :content_type => content_type,
+      FakeWeb.register_uri(:head, uri, :content_type => CONTENT_TYPE)
+      FakeWeb.register_uri(:get,  uri, :content_type => CONTENT_TYPE,
                                        :body         => expected_body)
     end
 
     it 'returns a single resource' do
-      artist = subject.artist(:mbid => mbid).artist
-      expect(artist.name).to eq('Diplo')
+      response = subject.artist(:mbid => mbid)
+      expect(response['artist']['name']).to eq('Diplo')
     end
   end
 end

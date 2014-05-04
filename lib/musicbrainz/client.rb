@@ -4,6 +4,8 @@ module MusicBrainz
   class Client
     include HTTParty
 
+    class Error < StandardError; end;
+
     base_uri 'musicbrainz.org/ws/2'
 
     def initialize(username = nil, password = nil)
@@ -75,11 +77,15 @@ module MusicBrainz
       request = Request.new(resource, params)
       response = self.class.get(request.path, request.options)
 
-      raise response.parsed_response if response.response.is_a?(Net::HTTPBadRequest)
+      if response.response.is_a?(Net::HTTPBadRequest)
+        raise Error.new(response.parsed_response)
+      end
 
-      raise response.message if response.response.is_a?(Net::HTTPUnauthorized)
+      if response.response.is_a?(Net::HTTPUnauthorized)
+        raise Error.new(response.message)
+      end
 
-      response.parsed_response
+      response.parsed_response['metadata']
     end
   end
 end
