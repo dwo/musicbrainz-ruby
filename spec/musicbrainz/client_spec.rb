@@ -18,17 +18,8 @@ describe MusicBrainz::Client do
   end
 
   it 'specifies a default User-Agent in the headers' do
-    expected = /musicbrainz-ruby gem/
+    expected = /musicbrainz-ruby #{MusicBrainz::VERSION}/
     expect(subject.class.default_options[:headers]['User-Agent']).to match(expected)
-  end
-
-  context 'when a User-Agent is provided' do
-    subject          { described_class.new(:'User-Agent' => user_agent) }
-    let(:user_agent) { 'Herp Derp v1.2.3' }
-
-    it 'specifies the provided User-Agent in the headers' do
-      expect(subject.class.default_options[:headers]['User-Agent']).to eq(user_agent)
-    end
   end
 
   context 'when making a bad request (no parameters)' do
@@ -51,7 +42,7 @@ describe MusicBrainz::Client do
     subject      { described_class.new(options) }
     let(:mbid)   { '4bd31567-70a8-4007-9ac6-3c68c7fc3d45' }
     let(:entity) { 'artist'}
-    let(:expected_rating) { "5" }
+    let(:expected_rating) { '5' }
 
     context 'and the resource is requested with authentication' do
       let(:options) { {:username => 'user', :password => 'password'} }
@@ -75,8 +66,8 @@ describe MusicBrainz::Client do
       let(:options) { Hash.new }
       before do
         rating_uri = described_class.base_uri + "/rating/?id=#{mbid}&entity=#{entity}"
-        FakeWeb.register_uri(:head, rating_uri, :status => ["401", "Authorization Required"])
-        FakeWeb.register_uri(:get,  rating_uri, :status => ["401", "Authorization Required"])
+        FakeWeb.register_uri(:head, rating_uri, :status => ['401', 'Authorization Required'])
+        FakeWeb.register_uri(:get,  rating_uri, :status => ['401', 'Authorization Required'])
       end
 
       it 'raises an error' do
@@ -126,9 +117,7 @@ describe MusicBrainz::Client do
 
     it 'returns a single resource' do
       artist = subject.artist(:mbid => mbid).artist
-      expect(artist).to be_kind_of(Hashie::Mash)
       expect(artist.name).to eq('Diplo')
     end
   end
-
 end
