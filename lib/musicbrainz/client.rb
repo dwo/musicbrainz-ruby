@@ -7,8 +7,15 @@ module MusicBrainz
 
     base_uri 'musicbrainz.org/ws/2'
 
-    def initialize(username = nil, password = nil)
-      self.class.headers 'User-Agent' => "musicbrainz-ruby #{MusicBrainz::VERSION}"
+    DEFAULT_USER_AGENT = "musicbrainz-ruby/#{MusicBrainz::VERSION} ( #{MusicBrainz::GEM_HOMEPAGE} )"
+
+    def initialize(user_agent = nil, username = nil, password = nil)
+      user_agent ||= DEFAULT_USER_AGENT
+      if user_agent.is_a?(String) and user_agent.length == 0
+        raise ArgumentError.new('user_agent must be a non-blank string')
+      end
+
+      self.class.headers 'User-Agent' => user_agent
 
       unless username.nil? or password.nil?
         self.class.digest_auth(username, password)

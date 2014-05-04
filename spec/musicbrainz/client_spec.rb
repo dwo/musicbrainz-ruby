@@ -19,9 +19,17 @@ describe MusicBrainz::Client do
     should respond_to(:discid, :puid, :isrc, :iswc).with(1).argument
   end
 
-  it 'specifies a User-Agent in the headers' do
-    expected = /musicbrainz-ruby #{MusicBrainz::VERSION}/
-    expect(subject.class.default_options[:headers]['User-Agent']).to match(expected)
+  it 'specifies a default User-Agent in the headers' do
+    expect(subject.class.default_options[:headers]['User-Agent']).to eq(described_class::DEFAULT_USER_AGENT)
+  end
+
+  context 'when a User-Agent is provided' do
+    let(:expected_user_agent) { 'MyMusicbrainzApp/1.2.3 ( http://example.org )' }
+    subject { described_class.new(expected_user_agent) }
+
+    it 'specifies the provided User-Agent in the headers' do
+      expect(subject.class.default_options[:headers]['User-Agent']).to eq(expected_user_agent)
+    end
   end
 
   context 'when making a bad request (no parameters)' do
@@ -42,7 +50,7 @@ describe MusicBrainz::Client do
   end
 
   context 'when requesting resources requiring authentication' do
-    subject      { described_class.new(user, password) }
+    subject      { described_class.new(nil, user, password) }
     let(:mbid)   { '4bd31567-70a8-4007-9ac6-3c68c7fc3d45' }
     let(:entity) { 'artist'}
     let(:expected_rating) { '5' }
