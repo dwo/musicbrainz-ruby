@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
                        lib/musicbrainz/version.rb]
   s.test_files    = Dir.glob('spec/**/*_spec.rb')
   s.require_paths = ['lib']
-  spec.required_ruby_version = '>= 1.8.7', '<= 2.1.0'
+  s.required_ruby_version = '>= 1.8.7', '<= 2.1.0'
 
   s.add_runtime_dependency('httparty', '~> 0.13.0')
 
