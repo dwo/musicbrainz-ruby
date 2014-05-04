@@ -3,7 +3,6 @@ require 'httparty'
 module MusicBrainz
   class Client
     include HTTParty
-
     class Error < StandardError; end;
 
     base_uri 'musicbrainz.org/ws/2'
@@ -11,7 +10,7 @@ module MusicBrainz
     def initialize(username = nil, password = nil)
       self.class.headers 'User-Agent' => "musicbrainz-ruby #{MusicBrainz::VERSION}"
 
-      unless username.nil? and password.nil?
+      unless username.nil? or password.nil?
         self.class.digest_auth(username, password)
       end
     end

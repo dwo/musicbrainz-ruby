@@ -81,18 +81,17 @@ describe MusicBrainz::Client do
           to raise_error(described_class::Error, /Authorization Required/)
       end
     end
-
   end
 
   context 'when searching for an existing resource' do
     let(:query) { 'Diplo' }
+    let(:uri)   { described_class.base_uri + "/artist/?query=#{query}" }
+    let(:expected_body) do
+      path = File.expand_path(File.join('spec', 'fixtures', 'artist_search_diplo.xml'))
+      File.read(path)
+    end
 
     before do
-      uri = described_class.base_uri + "/artist/?query=#{query}"
-
-      path = File.expand_path(File.join('spec', 'fixtures', 'artist_search_diplo.xml'))
-      expected_body = File.read(path)
-
       FakeWeb.register_uri(:head, uri, :content_type => CONTENT_TYPE)
       FakeWeb.register_uri(:get,  uri, :content_type => CONTENT_TYPE,
                                        :body         => expected_body)
@@ -107,13 +106,13 @@ describe MusicBrainz::Client do
 
   context 'when fetching a resource by MusicBrainz id' do
     let(:mbid) { 'a56bd8f9-8ef8-4d63-89a4-794ed1360dd2' }
+    let(:uri)  { described_class.base_uri + "/artist/#{mbid}" }
+    let(:expected_body) do
+      path = File.expand_path(File.join('spec', 'fixtures', 'artist_by_id_diplo.xml'))
+      File.read(path)
+    end
 
     before do
-      uri = described_class.base_uri + "/artist/#{mbid}"
-
-      path = File.expand_path(File.join('spec', 'fixtures', 'artist_by_id_diplo.xml'))
-      expected_body = File.read(path)
-
       FakeWeb.register_uri(:head, uri, :content_type => CONTENT_TYPE)
       FakeWeb.register_uri(:get,  uri, :content_type => CONTENT_TYPE,
                                        :body         => expected_body)
