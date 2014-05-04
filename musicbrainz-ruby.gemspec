@@ -9,7 +9,9 @@ Gem::Specification.new do |s|
   s.date         = %q{2013-05-04}
   s.email        = %q{robin.tweedie@gmail.com}
   s.summary      = %q{Simple Ruby client for MusicBrainz XML Web Service}
-  s.description  = %q{}
+  s.description  = <<-EOF
+    musicbrainz-ruby
+  EOF
   s.license      = 'MIT'
   s.requirements = 'An account at musicbrainz.org'
 

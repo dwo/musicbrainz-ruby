@@ -1,8 +1,3 @@
-source "http://rubygems.org"
+source 'https://rubygems.org'
 
 gemspec
-
-group :local do
-  gem 'nokogiri'
-  gem 'simplecov'
-end

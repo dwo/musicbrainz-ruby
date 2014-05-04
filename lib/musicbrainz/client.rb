@@ -1,24 +1,16 @@
 require 'httparty'
-require 'hashie'
 
 module MusicBrainz
   class Client
     include HTTParty
-    include Hashie
-
-    DEFAULT_USER_AGENT = "musicbrainz-ruby gem #{MusicBrainz::VERSION}"
 
     base_uri 'musicbrainz.org/ws/2'
 
-    # Provide your username and password to make authenticated calls
-    def initialize(options = {})
-      if options[:username] and options[:password]
-        self.class.digest_auth options[:username], options[:password]
-      end
-      if options[:'User-Agent']
-        self.class.headers 'User-Agent' => options[:'User-Agent']
-      else
-        self.class.headers 'User-Agent' => DEFAULT_USER_AGENT
+    def initialize(username = nil, password = nil)
+      self.class.headers 'User-Agent' => "musicbrainz-ruby #{MusicBrainz::VERSION}"
+
+      unless username.nil? and password.nil?
+        self.class.digest_auth(username, password)
       end
     end
 
@@ -83,15 +75,11 @@ module MusicBrainz
       request = Request.new(resource, params)
       response = self.class.get(request.path, request.options)
 
-      if response.response.is_a? Net::HTTPBadRequest
-        raise ArgumentError, response.parsed_response
-      end
+      raise response.parsed_response if response.response.is_a?(Net::HTTPBadRequest)
 
-      if response.response.is_a? Net::HTTPUnauthorized
-        raise response.message
-      end
+      raise response.message if response.response.is_a?(Net::HTTPUnauthorized)
 
-      Mash.new(response).metadata
+      response.parsed_response
     end
   end
 end
