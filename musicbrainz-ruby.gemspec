@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.files         = Dir.glob('lib/**/*.rb')
   s.test_files    = Dir.glob('spec/**/*_spec.rb')
   s.require_paths = ['lib']
-  s.required_ruby_version = '>= 1.8.7', '<= 2.1.0'
+  s.required_ruby_version = '>= 1.9.3', '<= 2.1.0'
 
   s.add_runtime_dependency('httparty', '~> 0.13.0')
 
