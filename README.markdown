@@ -1,14 +1,12 @@
 # MusicBrainz-ruby [![Build Status](https://travis-ci.org/dwo/musicbrainz-ruby.png?branch=master)](https://travis-ci.org/dwo/musicbrainz-ruby)
 
-O hai, I [HTTParty][1]'d ur [web service][2]. No offence, RBrainz gem.
+This aims to be the simplest possible [HTTParty][1] wrapper to the [MusicBrainz
+XML Web Service Version 2][2].
 
 This gem currently only supports the lookup, browse and search GET requests.
 
-Returns [Mashes][3] of the metadata tag from MusicBrainz's XML responses.
-
 [1]: https://github.com/jnunemaker/httparty
 [2]: http://wiki.musicbrainz.org/XMLWebService
-[3]: https://github.com/intridea/hashie
 
 ## Install
 
@@ -31,7 +29,7 @@ or in a Gemfile
 
 # MIT License
 
-(c) Robin Tweedie 2011
+(c) Robin Tweedie 2014
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

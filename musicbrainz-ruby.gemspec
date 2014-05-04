@@ -1,25 +1,28 @@
-# -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path('../lib', __FILE__)
 require 'musicbrainz/version'
 
 Gem::Specification.new do |s|
   s.name = %q{musicbrainz-ruby}
   s.version = MusicBrainz::VERSION
 
-  s.authors     = ['Robin Tweedie']
-  s.date        = %q{2011-02-02}
-  s.email       = %q{robin@songkick.com}
-  s.summary     = %q{Simple Ruby client for MusicBrainz XML Web Service}
-  s.description = %q{Simple Ruby client for MusicBrainz XML Web Service}
+  s.authors      = ['Robin Tweedie']
+  s.date         = %q{2013-05-04}
+  s.email        = %q{robin.tweedie@gmail.com}
+  s.summary      = %q{Simple Ruby client for MusicBrainz XML Web Service}
+  s.description  = %q{}
+  s.license      = 'MIT'
+  s.requirements = 'An account at musicbrainz.org'
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  s.files         = %w[lib/musicbrainz.rb
+                       lib/musicbrainz/client.rb
+                       lib/musicbrainz/request.rb
+                       lib/musicbrainz/version.rb]
+  s.test_files    = Dir.glob('spec/**/*_spec.rb')
+  s.require_paths = ['lib']
+  spec.required_ruby_version = '>= 1.8.7', '<= 2.1.0'
 
-  s.add_runtime_dependency('httparty', '~> 0.10.0')
-  s.add_runtime_dependency('hashie',   '~> 1.1.0')
+  s.add_runtime_dependency('httparty', '~> 0.13.0')
 
-  s.add_development_dependency('rspec',   '~> 2.12.0')
+  s.add_development_dependency('rspec',   '~> 2.14.0')
   s.add_development_dependency('fakeweb', '~> 1.3.0')
 end
