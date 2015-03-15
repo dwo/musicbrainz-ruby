@@ -11,7 +11,7 @@ module MusicBrainz
 
     def initialize(user_agent = nil, username = nil, password = nil)
       user_agent ||= DEFAULT_USER_AGENT
-      if user_agent.is_a?(String) and user_agent.length == 0
+      if user_agent.is_a?(String) && user_agent.length == 0
         raise ArgumentError.new('user_agent must be a non-blank string')
       end
 
