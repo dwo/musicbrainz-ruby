@@ -4,7 +4,7 @@
 
 * removed hashie dependency: plain hashes are returned by default
 * removed rake dependency for build
-* now supports ruby 1.9.3 - 2.2.x
+* now supports ruby 1.8.7 - 2.2.x
 
 ## 0.4.0
 
