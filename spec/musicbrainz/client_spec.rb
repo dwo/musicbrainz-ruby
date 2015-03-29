@@ -24,8 +24,8 @@ describe MusicBrainz::Client do
   end
 
   context 'when a User-Agent is provided' do
-    let(:expected_user_agent) { 'MyMusicbrainzApp/1.2.3 ( http://example.org )' }
-    subject { described_class.new(expected_user_agent) }
+    let(:expected_user_agent) { 'MyMusicBrainzApp/1.2.3 ( http://example.org )' }
+    subject { described_class.new(:user_agent => expected_user_agent) }
 
     it 'specifies the provided User-Agent in the headers' do
       expect(subject.class.default_options[:headers]['User-Agent']).to eq(expected_user_agent)
@@ -50,9 +50,9 @@ describe MusicBrainz::Client do
   end
 
   context 'when requesting resources requiring authentication' do
-    subject      { described_class.new(nil, user, password) }
+    subject      { described_class.new(:user => user, :password => password) }
     let(:mbid)   { '4bd31567-70a8-4007-9ac6-3c68c7fc3d45' }
-    let(:entity) { 'artist'}
+    let(:entity) { described_class::RESOURCE_ARTIST }
     let(:expected_rating) { '5' }
 
     context 'and the resource is requested with authentication' do
