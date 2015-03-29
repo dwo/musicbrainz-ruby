@@ -6,15 +6,14 @@ Gem::Specification.new do |s|
   s.version = MusicBrainz::VERSION
 
   s.authors      = ['Robin Tweedie']
-  s.date         = '2013-05-04'
+  s.date         = '2015-03-29'
   s.email        = 'robin.tweedie@gmail.com'
-  s.summary      = 'Simple Ruby client for MusicBrainz XML Web Service.'
+  s.summary      = 'Simple Ruby client for MusicBrainz XML Web Service version 2.'
   s.description  = 'musicbrainz-ruby'
   s.license      = 'MIT'
   s.requirements = '(optional) An account at musicbrainz.org for requests requiring authentication'
 
   s.files         = Dir.glob('lib/**/*.rb')
-  s.test_files    = Dir.glob('spec/**/*_spec.rb')
   s.require_paths = ['lib']
   s.required_ruby_version = '>= 1.8.7', '< 2.3.0'
 
