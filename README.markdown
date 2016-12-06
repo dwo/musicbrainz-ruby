@@ -25,7 +25,7 @@ or in a Gemfile
                                      :password => 'password')
 
     # Find an artist by id, include artist relations
-    brainz.artist(:mbid => '45d15468-2918-4da4-870b-d6b880504f77', :inc => 'artist-rels')
+    brainz.artist(:mbid => 'a56bd8f9-8ef8-4d63-89a4-794ed1360dd2', :inc => 'artist-rels')
     # Search for artists with the query 'Diplo'
     brainz.artist(:query => 'Diplo')
 
