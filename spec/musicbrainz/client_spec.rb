@@ -6,20 +6,20 @@ describe MusicBrainz::Client do
 
   it 'provides access to the core resources' do
     resources = [:artist, :label, :recording, :release, :release_group, :work]
-    should respond_to(*resources).with(1).argument
+    is_expected.to respond_to(*resources).with(1).argument
   end
 
   it 'provides access to the non-core resources' do
-    should respond_to(:rating, :tag, :collection).with(1).argument
+    is_expected.to respond_to(:rating, :tag, :collection).with(1).argument
   end
 
   it 'provides access to the unique identifier lookups' do
-    should respond_to(:discid, :puid, :isrc, :iswc).with(1).argument
+    is_expected.to respond_to(:discid, :puid, :isrc, :iswc).with(1).argument
   end
 
   it 'specifies a default User-Agent in the headers' do
     expected = /musicbrainz-ruby gem/
-    subject.class.default_options[:headers]['User-Agent'].should =~ expected
+    expect(subject.class.default_options[:headers]['User-Agent']).to match(expected)
   end
 
   context 'when a User-Agent is provided' do
@@ -27,7 +27,7 @@ describe MusicBrainz::Client do
     let(:user_agent) { 'Herp Derp v1.2.3' }
 
     it 'specifies the provided User-Agent in the headers' do
-      subject.class.default_options[:headers]['User-Agent'].should == user_agent
+      expect(subject.class.default_options[:headers]['User-Agent']).to eq(user_agent)
     end
   end
 
@@ -42,8 +42,8 @@ describe MusicBrainz::Client do
     end
 
     it 'raises an error' do
-      lambda { subject.artist }.
-        should raise_error(ArgumentError, /Must specify a least one parameter/)
+      expect { subject.artist }.
+        to raise_error(ArgumentError, /Must specify a least one parameter/)
     end
   end
 
@@ -65,9 +65,9 @@ describe MusicBrainz::Client do
       end
 
       it 'returns the resource' do
-        subject.rating(:id => mbid, :entity => entity).
-                user_rating.
-                should == expected_rating
+        expect(subject.rating(:id => mbid, :entity => entity).
+                user_rating).
+                to eq(expected_rating)
       end
     end
 
@@ -80,8 +80,8 @@ describe MusicBrainz::Client do
       end
 
       it 'raises an error' do
-        lambda { subject.rating(:id => mbid, :entity => entity) }.
-          should raise_error(RuntimeError, /Authorization Required/)
+        expect { subject.rating(:id => mbid, :entity => entity) }.
+          to raise_error(RuntimeError, /Authorization Required/)
       end
     end
 
@@ -104,8 +104,8 @@ describe MusicBrainz::Client do
 
     it 'returns a list of resources' do
       results = subject.artist(:query => query).artist_list.artist
-      results.should be_kind_of(Array)
-      results.size.should == 11
+      expect(results).to be_kind_of(Array)
+      expect(results.size).to eq(11)
     end
   end
 
@@ -126,8 +126,8 @@ describe MusicBrainz::Client do
 
     it 'returns a single resource' do
       artist = subject.artist(:mbid => mbid).artist
-      artist.should be_kind_of(Hashie::Mash)
-      artist.name.should == 'Diplo'
+      expect(artist).to be_kind_of(Hashie::Mash)
+      expect(artist.name).to eq('Diplo')
     end
   end
 
